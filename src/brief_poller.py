@@ -65,7 +65,16 @@ def find_freelancer(config: dict, name_hint: str) -> dict | None:
     return None
 
 
-def parse_brief_request(text: str) -> dict | None:
+def resolve_slack_mention(text: str, config: dict) -> str:
+    """Replace <@UID> mentions with the freelancer's name hint."""
+    uid_map = {f["user_id"]: f["name"] for f in config["freelancers"] if f.get("user_id")}
+    def replace(m):
+        uid = m.group(1)
+        return uid_map.get(uid, uid)
+    return re.sub(r"<@([A-Z0-9]+)>", replace, text)
+
+
+def parse_brief_request(text: str, config: dict = None) -> dict | None:
     """
     Parses: brief: [keyword] for @[name] due [date]
     Returns dict with keyword, freelancer_hint, due_date or None if no match.
@@ -73,6 +82,10 @@ def parse_brief_request(text: str) -> dict | None:
     text = text.strip()
     if not text.lower().startswith("brief:"):
         return None
+
+    # Replace Slack <@UID> mentions with real names before parsing
+    if config:
+        text = resolve_slack_mention(text, config)
 
     body = text[6:].strip()
 
@@ -184,7 +197,7 @@ def process_new_requests(manager_id: str, config: dict, state: list, processed_t
         if ts in processed_ts:
             continue
 
-        parsed = parse_brief_request(text)
+        parsed = parse_brief_request(text, config)
         if not parsed:
             continue
 
