@@ -1,0 +1,37 @@
+{
+  "freelancers": [
+    {
+      "name": "Eilaf",
+      "display_name": "eilafahmed.99",
+      "channel_name": "content-eilaf",
+      "channel_id": "C0B2RNM7988",
+      "user_id": "U07JAD3KYMA"
+    },
+    {
+      "name": "Meeba",
+      "display_name": "meeba gracy",
+      "channel_name": "content-meeba",
+      "channel_id": "C0B1VD5E4NA",
+      "user_id": "U06PBA1SQAD"
+    },
+    {
+      "name": "JP",
+      "display_name": "jp",
+      "channel_name": "content-jp",
+      "channel_id": "C0B1VD7S1UN",
+      "user_id": "U0ALVARPHC2"
+    },
+    {
+      "name": "Noelle",
+      "display_name": "Noelle Ann Mercado",
+      "channel_name": "content-noelle",
+      "channel_id": "C0B2133ADFW",
+      "user_id": "U0AP634MBA5"
+    }
+  ],
+  "manager": {
+    "name": "Kline",
+    "display_name": "Kline Umali",
+    "user_id": "U067SMUQ69Z"
+  }
+}
